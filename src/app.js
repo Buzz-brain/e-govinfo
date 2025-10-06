@@ -9,7 +9,7 @@ const app = express();
 
 app.use(helmet());
 const allowedOrigins = [
-  "https://haid-web.vercel.app",
+  "https://e-govinfo-app--31vyvdkj9h.expo.app",
   "http://localhost:8081",
   "http://localhost:3000",
   "http://localhost:5000",
