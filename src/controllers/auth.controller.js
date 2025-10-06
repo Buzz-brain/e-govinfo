@@ -40,18 +40,12 @@ exports.register = async (req, res) => {
   });
 
   const token = jwt.sign(
-    { id: user._id, email: user.email },
+    { id: user._id, email: user.email, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );
-  res.cookie("token", token, {
-    httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    secure: true,
-    sameSite: "none",
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  });
   return res.json({
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -83,14 +77,8 @@ exports.login = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );
-  res.cookie("token", token, {
-    httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    secure: true,
-    sameSite: "none",
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  });
   return res.json({
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -116,14 +104,8 @@ exports.guestLogin = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: "2d" }
   );
-  res.cookie("token", token, {
-    httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    secure: true,
-    sameSite: "none",
-    maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
-  });
   return res.json({
+    token,
     user: {
       id: guest._id,
       name: guest.name,
@@ -178,11 +160,5 @@ exports.me = async (req, res) => {
 
 // Logout
 exports.logout = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    secure: true,
-    sameSite: "none",
-  });
   return res.json({ message: "Logged out successfully" });
 };
