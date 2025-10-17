@@ -9,7 +9,7 @@ const app = express();
 
 app.use(helmet());
 const allowedOrigins = [
-  "https://e-govinfo-app--cbr18xesuh.expo.app",
+  "https://e-govinfo-app--24rphs07xa.expo.app",
   "http://localhost:8081",
   "http://localhost:3000",
   "http://localhost:5000",
